@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="styles/default.css" rel="stylesheet" type="text/css" /> 
+<script type="text/javascript" src="scripts/jquery-1.4.4.js"></script>
+<script type="text/javascript" src="scripts/jquery.hotkeys.js"></script>
+<script type="text/javascript" src="scripts/json2.js"></script>
+<script type="text/javascript" src="scripts/Math.uuid.js"> </script>
+<script type="text/javascript" src="scripts/surveys.js"></script>
+
+<script type="text/javascript">
+     $(document).ready(function() {
+       paintQuestion();
+
+       $(document).bind('keyup', 'return', function(event) {
+          nextQuestion();
+          event.preventDefault();
+       });
+       $(document).bind('keyup', 'ctrl+right', function(event) {
+          nextQuestion();
+          event.preventDefault();
+       });
+       $(document).bind('keyup', 'ctrl+left', function(event) {
+          previousQuestion();
+          event.preventDefault();
+       });
+
+     }
+);
+
+</script>
+
+</head>
+<body>
+<h1>Survey App</h1>
+<p>
+<a href="index.html">Menu</a>&nbsp;&nbsp;
+<!-- <a href="#">Add Extra Info</a> -->
+
+<div id="question" class="question">
+  Survey # <script type="text/javascript">
+  var id_survey = Math.uuid();
+  document.writeln(id_survey);
+</script>
+
+</div>
+<br/>
+
+<div class="navigation">
+  <button id="previous" onclick="previousQuestion()">Previous</button>&nbsp;&nbsp;
+  <button id="next" onclick="nextQuestion()">Next</button>
+</div>
+</p>
+<!-- 
+<div class="">
+<a href="#">Get surveys report</a><br/>
+</div>
+-->
+
+</body>
+</html>
