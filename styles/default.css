@@ -31,3 +31,18 @@ th {
     background-color:green;
     color:white;
 }
+
+button {
+    color:#050; 
+    font: bold 84% 'trebuchet ms',helvetica,sans-serif; 
+    background-color:#fed; 
+    border:1px solid; 
+    border-color: #696 #363 #363 #696;
+}
+
+input[type=text] { 
+//    width: 300px; 
+    font: bold 84% 'trebuchet ms',helvetica,sans-serif; 
+//    background-color: #333333; 
+    foreground-color: #ffffff;
+} 

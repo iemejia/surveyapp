@@ -8,7 +8,8 @@
 <script type="text/javascript" src="scripts/json2.js"></script>
 <script type="text/javascript" src="scripts/Math.uuid.js"> </script>
 <script type="text/javascript" src="scripts/surveys.js"></script>
-<script type="text/javascript" src="scripts/export.js"></script>
+<script type="text/javascript" src="scripts/db.js"></script>
+<script type="text/javascript" src="scripts/logic.js"></script>
 </head>
 <body>
 <h1>Survey App</h1>
@@ -16,7 +17,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
 //       exportTable();
-       $("#navigation").append(exportTable());
+       $("#navigation").append(getExportDataAsHtml ("public"));
   });
   
 
