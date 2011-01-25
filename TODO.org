@@ -1,0 +1,14 @@
+TODO
+
+* TODO Create google chrome deployer (deploy app)
+* TODO Change persistence model (copy the dao pattern idea)
+* TODO Revisar expiration policies on data
+"surveysapp/machine/0"
+"surveysapp/surveys/0"
+"surveysapp:surveys:index"
+"surveysapp:surveys:associated_surveys:0" ={0,3,5}
+"surveysapp:surveys:associated_surveys:index"
+"surveysapp:answers:survey_0:answer:0"
+"surveysapp:surveys:survey:index"
+* TODO Online deployer
+* TODO Mejoras de aplicacion
