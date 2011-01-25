@@ -1,6 +1,6 @@
 {
-  "name": "Survey's App",
-  "description": "Generic survey application",
+  "name": "Surveys App",
+  "description": "Survey Application",
   "version": "1.0",
   "app": {
     "launch": {
