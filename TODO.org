@@ -11,11 +11,19 @@ TODO
 "surveysapp:surveys:survey:index"
 * DONE consult_surveys.html?id_survey=0 vs consult_surveys.html
 * DONE Cambiar datepicker a jqueryui
-* TODO Ids de navegation (de 0 a #)
+* DONE Mostrar siempre un campo en todos los reportes (Laura's 'bug')
+* DONE Ids de navegation (de 0 a #)
+* TODO Initial survey created twice
+* TODO problema que se desplaza a 1 si el parametro deberia ser 0
+ej. file:///Users/ismael/Desktop/surveyapp/survey.html?id_answer=2&id_question=888
+
 * TODO Option para regresar en la ultima pagina
 * TODO GUI customization
+* TODO Id computador
 * TODO BUGS
 ** TODO Navigation bug con enter en chrome
 * TODO Improved navigation
 * TODO Validation
 * TODO Delete survey options
+* TODO Fix firefox and ie8 compatibility issues
+* TODO Fix consulta de surveys_asociados

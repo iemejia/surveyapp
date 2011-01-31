@@ -83,12 +83,15 @@ var paintQuestion = function() {
 	    html_answer = '<input type="text" class="date_input" id="answer" name="answer"></input>';
 	}
 
-	$("#question").append(
-	    "<ul>" + 
-		"<li>Survey #" + answers.id_answers + "</li>" +
-		"<li>Question #" + current_question.id + " / " + current_survey.questions.length + "</li>" +
-		"<li>" + current_question.question + "</li>" +
-		"<li>" + html_answer + "</li></ul>");
+	$("#question").append(function(index,html) {
+	    var num_questions = current_survey.questions.length-1;
+	    var html = "<ul>" + 
+		"<li><b>Survey # </b> " + answers.id_answers + "</li>" +
+		"<li><b>Question # </b>" + current_question.id + " / " + num_questions + "</li>" +
+		"<li><b>" + current_question.question + "</b></li>" +
+		"<li>" + html_answer + "</li></ul>";
+	    return html;
+	});
 
 	$('.date_input').datepicker($.datepicker.regional[ "id" ] );
 
@@ -151,6 +154,7 @@ var paintQuestion = function() {
 };
 
 var paintExportedSurvey = function() {
+//    $("table").fadeOut();
     $("table").remove();
     var id_survey = (getParameterByName("id_survey")) ? parseInt(getParameterByName("id_survey")) : 0;
     var type = getParameterByName("type");

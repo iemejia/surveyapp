@@ -1,18 +1,42 @@
 body {
-	background: #000000 ;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 13px;
-	color: #B0B0B0;
+    font-family: "Lucida Grande", Verdana;
+    font-size: 13px;
+    color: #7E7E7E;
 }
 
+h1 {
+    background-color: #d5d5d5;
+    color: black;
+    -webkit-border-radius: 0.75em;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d9d9d9), to(#ababab));
+    -webkit-box-shadow: 0 0.15em 0.17em rgba(0, 0, 0, 0.5);
+    display: block;
+    padding: 0.4em;
+    padding-left: 1em;
+    padding-bottom: 0.6em;
+    margin-top: 30px;
+    margin-bottom: 0.5em;
+    position: relative;
+
+    letter-spacing: -0.075em;
+}
 
 a {
-	color: #739CCE;
-	text-decoration: none;
+    color: black; //#739CCE;
+    text-decoration: none;
+    padding: 2px;
+//	border: 1px solid;
 }
 
 a:hover {
 	text-decoration: underline;
+/*
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0.1)), to(rgba(245, 245, 245, 0.0))), -webkit-gradient(radial, 50% 0%, 10, 50% 50%, 100, from(rgba(255, 255, 255, 0.35)), to(rgba(245, 245, 245, 0))), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#ababab));
+	background-color: #adadad;
+	background-color: #000000;
+	-webkit-border-radius: 0.6em;   
+*/
+
 }
 
 
@@ -22,27 +46,102 @@ ul {
 	list-style: none;
 }
 
+li {
+    background-color: #d5d5d5;
+    -webkit-border-radius: 0.75em;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d9d9d9), to(#ababab));
+    -webkit-box-shadow: 0 0.15em 0.17em rgba(0, 0, 0, 0.5);
+    display: block;
+    padding: 0.4em;
+    padding-bottom: 0.6em;
+
+    margin: 0;
+    display: block;
+    padding-left: 30px; //1em;
+    line-height: 2.15em;
+    padding-top: 0.15em;
+    background-position: 0% 50%;
+    background-repeat: no-repeat;
+}
+
+li a:hover {
+	background-color: #000000;
+	-webkit-border-radius: 0.6em;   
+}
+li a {
+//	margin-left: -30px;
+//	padding-left: 30px;
+}
 
 table, td, th {
-    border:1px solid green;
+//    border:1px solid green;
 }
 
 th {
-    background-color:green;
-    color:white;
+    background-color: #d5d5d5;
+    color: black; //#7E7E7E
+    -webkit-border-radius: 0.75em;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d9d9d9), to(#ababab));
+    -webkit-box-shadow: 0 0.15em 0.17em rgba(0, 0, 0, 0.5);
 }
 
-button {
-    color:#050; 
-    font: bold 84% 'trebuchet ms',helvetica,sans-serif; 
-    background-color:#fed; 
-    border:1px solid; 
-    border-color: #696 #363 #363 #696;
+div#menu {
+    padding-left: 30px; //1em;
+    padding-bottom: 0.5em; //1em;
 }
 
-input[type=text] { 
+div#question li {
+    background-color: #FFFFFF;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#ffffff));
+    color: #black;
+
+//    padding: 0.2em;
+    padding-top: 0.05em;
+    padding-bottom: 0.05em;
+}
+
+div#question input {
+    padding-bottom: 0.5em;
+}
+
+div#navigation ul {
+//    background-color: #d5d5d5;
+//    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#ffffff));
+    padding-left: 30px;
+    padding-bottom: 0.5em;
+}
+
+input[type="text"] { 
 //    width: 300px; 
-    font: bold 84% 'trebuchet ms',helvetica,sans-serif; 
+//    font: bold 84% 'trebuchet ms',helvetica,sans-serif; 
 //    background-color: #333333; 
-    foreground-color: #ffffff;
+    color: black; //#ffffff
+} 
+
+input[type="button"] {
+    // The fancy mac color definitions
+	background-color: #d5d5d5;
+    -webkit-border-radius: 0.75em;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c9c9c9), to(#8c8c8c));
+
+/*
+    background-color: #d5d5d5;
+    -webkit-border-radius: 0.75em;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d9d9d9), to(#ababab));
+    -webkit-box-shadow: 0 0.15em 0.17em rgba(0, 0, 0, 0.5);
+*/
+
+//    display: block;
+    width: 70px; 
+    cursor: hand;
+    padding: 0.4em;
+    padding-left: 1em;
+    padding-bottom: 0.6em;
+/*
+    padding: 0px;
+    font: bold 84% 'trebuchet ms',helvetica,sans-serif; 
+    foreground-color: #7E7E7E;
+    background-color: #D3D3D3;
+    border: 1px solid;
+*/
 } 

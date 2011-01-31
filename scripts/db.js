@@ -170,8 +170,12 @@ var getAnswerAsHtml = function(id_answer) {
 	table += "<tr><th>Id</th><th>Question</th><th>Answer</th></tr>";
 	var survey = surveys_dao.get(answer.id_survey);
 	for (var i=0; i < survey.questions.length; i++) {
-	    table += '<tr><td>' + i + '</td><td>' + survey.questions[i].question;
-	    table += '</td><td>' + answer.answers[i].answer + '</td></tr>';
+	    table += '<tr><td>' + i + '</td><td>' + survey.questions[i].question + '</td>';
+	    if (answer.answers[i]) {
+		table += '<td>' + answer.answers[i].answer + '</td></tr>';
+	    } else {
+		table += '<td></td></tr>';
+	    }
 	}	
 	table += "</tbody></table>";
     }
@@ -192,16 +196,25 @@ var getExportDataAsHtml = function(id_survey, type) {
 	if (val.report) {
 	    val.secrecy = "report";
 	}
+	// if secrecy is always we make it the same as the type in order to return it
+	if (val.secrecy === "always") {
+	    val.secrecy = type;
+	}
 	return (val.secrecy === type);
     });
     
     // we build the header
     var table = "<table><tbody>";
-    table += "<tr><th colspan=" + filtered_questions.length+1 + '">' + id_survey + "</th></tr>";
+    // survey.description
+//    table += "<tr><th colspan=" + filtered_questions.length+1 + '">' + survey.id + "</th></tr>";
     table += "<tr>";
     table += "<th></th>";
     for (var i = 0; i < filtered_questions.length ; i++) {
 	table += "<th>" + filtered_questions[i].id +"</th>";
+    }
+    if (type === "report") {
+	table += '<th rowspan="2">Associated<br/>Surveys</th>';
+	table += '<th rowspan="2" colspan="4">Options</th>';
     }
     table += "</tr>";
     table += "<tr>";
@@ -209,11 +222,6 @@ var getExportDataAsHtml = function(id_survey, type) {
     for (var i = 0; i < filtered_questions.length ; i++) {
 	table += "<th>" + filtered_questions[i].question +"</th>";
     }
-
-    if (type === "report") {
-	table += "<th>Associated<br/>Surveys</th>";
-    }
-
     table += "</tr>";
 
     // and the answers
@@ -241,7 +249,10 @@ var getExportDataAsHtml = function(id_survey, type) {
 		for (var j = 0; j < associated_answers.id_answers.length; j++) {
 		    var associated_answer = answers_dao.get(associated_answers.id_answers[j]);
 		    if (associated_answer) {
-			table += '<a href="survey.html?id_answer=' + associated_answer.id + '">' + associated_answer.id + '</a>';
+//			table += associated_answer.id_answers + ' ';
+			table += '<a href="view_answer.html?id_answer=' + associated_answer.id + '">' + associated_answer.id_answers + '</a> ';
+			table += '<a href="survey.html?id_answer=' + associated_answer.id + '">Edit</a> ';
+			table += '<a href="#">Remove</a>';
 			table += "<br/>";
 		    }
 		}
@@ -252,6 +263,7 @@ var getExportDataAsHtml = function(id_survey, type) {
 	    table += '<td><a href="view_answer.html?id_answer=' + answer.id +'">View</a></td>';
 	    table += '<td><a href="survey.html?id_answer=' + answer.id +'">Edit</a></td>';
 	    table += '<td><a href="survey.html?id_survey=1&id_answer_parent=' + answer.id + '">Associate</a></td>';
+	    table += '<td><a href="#">Remove</a></td>';
 	}
 //	<a href="survey.html?id_survey=' + answer.id +'">Associate Survey</a></td>';
 //	table += '<td><a href="survey.html?id_answer=' + answer.id +'">Edit</a></td>';
