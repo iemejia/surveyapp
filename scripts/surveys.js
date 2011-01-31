@@ -149,3 +149,5 @@ var surveys = {"surveys": [
 for (var i=0; i < surveys.surveys.length ; i++) {
     surveys_dao.save(surveys.surveys[i]);
 }
+
+window.localStorage.setItem(surveys_dao.INDEX, surveys.surveys.length);

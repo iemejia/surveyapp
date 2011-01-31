@@ -1,3 +1,11 @@
+if (typeof Object.create !== 'function') {
+    Object.create = function (o) {
+        function F() {}
+        F.prototype = o;
+        return new F();
+    };
+}
+
 function has(array, value) {
     for (var i = 0; i < array.length; i++) {
 	if (array[i] === value) {
@@ -25,7 +33,7 @@ var dao = {
     init: function() {
         // initialize the storage index
 	if (!this.index()) {
-            window.localStorage.setItem(this.INDEX, 1);
+            window.localStorage.setItem(this.INDEX, 0);
 	}
     },
 

@@ -1,8 +1,7 @@
 TODO
-
-* TODO Create google chrome deployer (deploy app)
-* TODO Change persistence model (copy the dao pattern idea)
-* TODO Revisar expiration policies on data
+* DONE Create google chrome deployer (deploy app)
+* DONE Change persistence model (copy the dao pattern idea)
+* DONE Revisar expiration policies on data
 "surveysapp/machine/0"
 "surveysapp/surveys/0"
 "surveysapp:surveys:index"
@@ -10,5 +9,13 @@ TODO
 "surveysapp:surveys:associated_surveys:index"
 "surveysapp:answers:survey_0:answer:0"
 "surveysapp:surveys:survey:index"
-* TODO Online deployer
-* TODO Mejoras de aplicacion
+* DONE consult_surveys.html?id_survey=0 vs consult_surveys.html
+* DONE Cambiar datepicker a jqueryui
+* TODO Ids de navegation (de 0 a #)
+* TODO Option para regresar en la ultima pagina
+* TODO GUI customization
+* TODO BUGS
+** TODO Navigation bug con enter en chrome
+* TODO Improved navigation
+* TODO Validation
+* TODO Delete survey options

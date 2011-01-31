@@ -90,7 +90,7 @@ var paintQuestion = function() {
 		"<li>" + current_question.question + "</li>" +
 		"<li>" + html_answer + "</li></ul>");
 
-	$($.date_input.initialize);
+	$('.date_input').datepicker($.datepicker.regional[ "id" ] );
 
 	// We update the view with the values of the model (answers)
 	$('input:text').val(function(index, value) {
