@@ -14,10 +14,9 @@ TODO
 * DONE Mostrar siempre un campo en todos los reportes (Laura's 'bug')
 * DONE Ids de navegation (de 0 a #)
 * DONE GUI customization
-* TODO El bug del refresh
-* TODO problema que se desplaza a 1 si el parametro deberia ser 0
+* DONE Fix consulta de surveys_asociados
+* DONE problema que se desplaza a 1 si el parametro deberia ser 0
 ej. file:///Users/ismael/Desktop/surveyapp/survey.html?id_answer=2&id_question=888
-
 * TODO Option para regresar en la ultima pagina
 * TODO Id computador
 * TODO BUGS
@@ -26,4 +25,5 @@ ej. file:///Users/ismael/Desktop/surveyapp/survey.html?id_answer=2&id_question=8
 * TODO Validation
 * TODO Delete survey options
 * TODO Fix firefox and ie8 compatibility issues
-* TODO Fix consulta de surveys_asociados
+
+* TODO El bug del refresh
