@@ -39,7 +39,9 @@ var previousQuestion = function() {
     paintQuestion();
     //we persist the data
     answers_dao.save(answers);
-    associated_answers_dao.associate(id_answer_parent, answers);
+    if(id_answer_parent) {
+	associated_answers_dao.associate(id_answer_parent, answers);
+    }
 };
 
 var nextQuestion = function() {
@@ -51,7 +53,9 @@ var nextQuestion = function() {
     paintQuestion();
     //we persist the data
     answers_dao.save(answers);
-    associated_answers_dao.associate(id_answer_parent, answers);
+    if(id_answer_parent) {
+	associated_answers_dao.associate(id_answer_parent, answers);
+    }
 };
 
 var paintQuestion = function() {

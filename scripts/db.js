@@ -46,13 +46,21 @@ var dao = {
     },
 
     save: function(entry) {
-	if (!entry.id) {
+	//horrible hack with to avoid the problem of the id =0 = false
+	if (typeof(entry.id) == 'undefined') {
             entry.id = this.index();
 	    entry.create_date = new Date();
+	    entry.active = "true";
             window.localStorage.setItem(this.INDEX, this.index()+1);
 	}
 	entry.update_date = new Date();
         window.localStorage.setItem(this.KEY + entry.id, JSON.stringify(entry));
+    },
+
+    /** delete actually doesn't remove but restricts to the active registers */
+    delete: function(entry) {
+	entry.active = "false";
+	this.save(entry);
     },
 
     remove: function(entry) {
@@ -111,6 +119,7 @@ surveys_dao.init();
 var answers_dao = Object.create(dao);
 answers_dao.INDEX = "answers:index";
 answers_dao.KEY = "answers:";
+answers_dao.init();
 
 /** returns the object with the new empty answers for a given survey */
 answers_dao.createForSurvey = function(id_survey) {
@@ -131,7 +140,7 @@ answers_dao.createForSurvey = function(id_survey) {
     }
     return undefined;
 };
-answers_dao.init();
+
 
 /*
 var computer_id_dao = Object.create(dao);
@@ -144,6 +153,7 @@ computer_id_dao.save({id_computer: Math.uuid()});
 var associated_answers_dao = Object.create(dao);
 associated_answers_dao.INDEX = "associated_answers:index";
 associated_answers_dao.KEY = "associated_answers:";
+associated_answers_dao.init();
 associated_answers_dao.associate = function(id_answer_parent, answers) {
     if (id_answer_parent) {
 	var associated_answer = this.get(id_answer_parent);
@@ -160,7 +170,7 @@ associated_answers_dao.associate = function(id_answer_parent, answers) {
 	this.save(associated_answer);
     }
 };
-associated_answers_dao.init();
+
 
 var getAnswerAsHtml = function(id_answer) {
     var table = "";
@@ -207,6 +217,8 @@ var getExportDataAsHtml = function(id_survey, type) {
     var table = "<table><tbody>";
     // survey.description
 //    table += "<tr><th colspan=" + filtered_questions.length+1 + '">' + survey.id + "</th></tr>";
+
+    // we print the ids of the questions
     table += "<tr>";
     table += "<th></th>";
     for (var i = 0; i < filtered_questions.length ; i++) {
@@ -217,6 +229,7 @@ var getExportDataAsHtml = function(id_survey, type) {
 	table += '<th rowspan="2" colspan="4">Options</th>';
     }
     table += "</tr>";
+    // Next row is the header questions
     table += "<tr>";
     table += "<th>Id survey</th>";
     for (var i = 0; i < filtered_questions.length ; i++) {
@@ -224,20 +237,23 @@ var getExportDataAsHtml = function(id_survey, type) {
     }
     table += "</tr>";
 
-    // and the answers
+    // we get all the surveys of a given id_survey type
     var answers_by_survey = answers_dao.getAll().filter(function(val) {
 	return (val.id_survey === id_survey);
     });
 
+    // now we print the answers
     for (var i = 0; i < answers_by_survey.length ; i++) {
 	var answer = answers_by_survey[i];
 	table += "<tr>";
 	table += "<td>" + answer.id + "</td>";
+	// we print the corresponding answers for each survey
 	for (var j = 0; j < filtered_questions.length ; j++) {
-	    for (var k = 0; k < answer.answers.length ; k++) {
-		if (filtered_questions[j].id == answer.answers[k].id) {
-		    table += "<td>" + answer.answers[j].answer + "</td>";		    
-		}
+	    var answer_for_question = answer.answers[filtered_questions[j].id];
+	    if (answer_for_question) {
+		table += "<td>" + answer_for_question.answer + "</td>";		    		  
+	    } else {
+		table += "<td></td>";
 	    }
 	}
 
@@ -263,7 +279,7 @@ var getExportDataAsHtml = function(id_survey, type) {
 	    table += '<td><a href="view_answer.html?id_answer=' + answer.id +'">View</a></td>';
 	    table += '<td><a href="survey.html?id_answer=' + answer.id +'">Edit</a></td>';
 	    table += '<td><a href="survey.html?id_survey=1&id_answer_parent=' + answer.id + '">Associate</a></td>';
-//	    table += '<td><a href="#">Remove</a></td>';
+//	    table += '<td><a href="#" onclick="answers_dao.delete(' + answer.id + ')"' + '>Remove</a></td>';
 	}
 //	<a href="survey.html?id_survey=' + answer.id +'">Associate Survey</a></td>';
 //	table += '<td><a href="survey.html?id_answer=' + answer.id +'">Edit</a></td>';
