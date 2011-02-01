@@ -1,5 +1,5 @@
 //OPTIONAL VALUES
-// DONE default: "coco" // puts a default value in the answer for a question
+// DONE value: "coco" // puts a default value in the answer for a question
 // DONE report : "true" // 
 // DONE secrecy: "always" is preferred to report for always on fields 
 // TODO required: "true"
@@ -112,8 +112,8 @@ var surveys = {"surveys": [
 	 {id: "100", question: "PERTANYAAN YANG MANA YANG KELIHATANNYA MENARIK BAGI RESPONDEN?", type: "1"},
 	 {id: "101", question: "WAKTU SELESAI", type: "1"},
 	 {id: "102", question: "Interview seluruhnya/sebagian besar dilakukan dengan menggunakan bahasa apa?", type: "1"},
-	 {id: "103", question: "Bahasa lain yang digunakan (jika ada):", type: "1"},
-     ], },
+	 {id: "103", question: "Bahasa lain yang digunakan (jika ada):", type: "1"}
+     ] },
 
     {id: "1", description: "Extended survey",
      questions: [
@@ -154,9 +154,8 @@ var surveys = {"surveys": [
 	 {id: "40", question: "Minggu, ada darah / lendir", type: "2", options: ["Dengan darah dan","atau lendir"] },
 	 {id: "41", question: "Minggu, Jenis Air", type: "2", options: ["Sumur","Pam","Isi Ulang","Air dalam Kemasan"] },
 	 {id: "42", question: "Minggu, Air dimasak/direbus", type: "2", options: ["ya", "tidak"]}
-     ], },
-],
-};
+     ] }
+] };
 
 for (var i=0; i < surveys.surveys.length ; i++) {
     surveys_dao.save(surveys.surveys[i]);

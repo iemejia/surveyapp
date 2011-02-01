@@ -1,3 +1,27 @@
+﻿if (!Array.prototype.filter)
+{
+  Array.prototype.filter = function(fun /*, thisp*/)
+  {
+    var len = this.length;
+    if (typeof fun != "function")
+      throw new TypeError();
+
+    var res = new Array();
+    var thisp = arguments[1];
+    for (var i = 0; i < len; i++)
+    {
+      if (i in this)
+      {
+        var val = this[i]; // in case fun mutates this
+        if (fun.call(thisp, val, i, this))
+          res.push(val);
+      }
+    }
+
+    return res;
+  };
+}
+
 if (typeof Object.create !== 'function') {
     Object.create = function (o) {
         function F() {}
@@ -8,9 +32,9 @@ if (typeof Object.create !== 'function') {
 
 function has(array, value) {
     for (var i = 0; i < array.length; i++) {
-	if (array[i] === value) {
-	    return true;
-	}
+		if (array[i] === value) {
+			return true;
+		}
     }
     return false;
 }
@@ -21,7 +45,7 @@ function getParameterByName( name ) {
     var regex = new RegExp( regexS );
     var results = regex.exec( window.location.href );
     if( results == null ) {
-	return undefined;
+		return undefined;
     }
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
@@ -32,81 +56,80 @@ var dao = {
 
     init: function() {
         // initialize the storage index
-	if (!this.index()) {
-            window.localStorage.setItem(this.INDEX, 0);
-	}
+		if (!this.index()) {
+			window.localStorage.setItem(this.INDEX, 0);
+		}
     },
 
     index: function() {
-	var ind = window.localStorage.getItem(this.INDEX);
-	if (ind) {
-	    return parseInt(ind);
-	}
-	return undefined;
+		var ind = window.localStorage.getItem(this.INDEX);
+		if (ind) {
+			return parseInt(ind);
+		}
+		return undefined;
     },
 
     save: function(entry) {
-	//horrible hack with to avoid the problem of the id =0 = false
-	if (typeof(entry.id) == 'undefined') {
-            entry.id = this.index();
-	    entry.create_date = new Date();
-	    entry.active = "true";
+		//horrible hack with to avoid the problem of the id =0 = false
+		if ((typeof entry.id) === 'undefined') {
+			entry.id = this.index();
+			entry.create_date = new Date();
+			entry.active = "true";
             window.localStorage.setItem(this.INDEX, this.index()+1);
-	}
-	entry.update_date = new Date();
+		}
+		entry.update_date = new Date();
         window.localStorage.setItem(this.KEY + entry.id, JSON.stringify(entry));
     },
 
-    /** delete actually doesn't remove but restricts to the active registers */
-    delete: function(entry) {
-	entry.active = "false";
-	this.save(entry);
+    /** inactivate actually doesn't remove but restricts to the active registers */
+    inactivate: function(entry) {
+		entry.active = "false";
+		this.save(entry);
     },
 
     remove: function(entry) {
-	window.localStorage.removeItem(this.KEY + entry.id);
+		window.localStorage.removeItem(this.KEY + entry.id);
     },
 
     get: function(id) {
-	return JSON.parse(window.localStorage.getItem(this.KEY + id));
+		return JSON.parse(window.localStorage.getItem(this.KEY + id));
     },
 
     exists: function(id) {
-	return (this.get(id));
+		return (this.get(id));
     },
 
     getAll: function() {
-	var all = [];
-	for(var i=0; i < this.index(); i++) {
-	    var value = JSON.parse(window.localStorage.getItem(this.KEY + i));
-	    if (value) {
-		all.push(value);
-	    }
-	}
-	return all;
+		var all = [];
+		for (var i=0; i < this.index(); i++) {
+			var value = JSON.parse(window.localStorage.getItem(this.KEY + i));
+			if (value) {
+				all.push(value);
+			}
+		}
+		return all;
     },
 
     /** TODO not tested, use getAll().filter() for the moment */
     getByCondition: function(fun) {
-	var len = this.index(); //this.length
-	if (typeof fun != "function") {
-	    throw new TypeError();
-	}
-	var res = new Array();
-	var thisp = arguments[1];
-	for (var i = 0; i < len; i++) {
-	    if (i in this) {
-		// var val = this[i] in case fun mutates this
-		var val = JSON.parse(window.localStorage.getItem(this.KEY + i)); 
-		if (fun.call(thisp, val, i, this)) {
-		    res.push(val);
+		var len = this.index(); //this.length
+		if (typeof fun != "function") {
+			throw new TypeError();
 		}
-	    }
-	}
-	return res;
-	//return this.getAll().filter(condition);
-    },
-
+		var res = new Array();
+		var thisp = arguments[1];
+		for (var i = 0; i < len; i++) {
+			if (i in this) {
+			// var val = this[i] in case fun mutates this
+				var val = JSON.parse(window.localStorage.getItem(this.KEY + i)); 
+				if (fun.call(thisp, val, i, this)) {
+					res.push(val);
+				}
+			}
+		}
+		return res;
+		//return this.getAll().filter(condition);
+    }
 };
 
 // surveys.surveys.filter( function(val) { return (val.id_survey == 0 );} );
@@ -128,11 +151,11 @@ answers_dao.createForSurvey = function(id_survey) {
 	var answers = { id_answers: Math.uuid(), id_survey: id_survey, 
 			answers: new Array(survey.questions.length) }; 
 	//id is added on save time if not defined, same for creation and update dates
-	for (var i=0; i<survey.questions.length; i++) {
+	for (var i=0; i < survey.questions.length; i++) {
 	    var val = "";
 	    // we add the default value if its established
-	    if (survey.questions[i].default) {
-		val = survey.questions[i].default;
+	    if ((typeof survey.questions[i].value) !== 'undefined') {
+			val = survey.questions[i].value;
 	    }
 	    answers.answers[i] = {id: i, answer: val}; //extra will be added in the future an saved in serialization
 	}
@@ -159,9 +182,9 @@ associated_answers_dao.associate = function(id_answer_parent, answers) {
 	var associated_answer = this.get(id_answer_parent);
 	if (!associated_answer) {
 	    associated_answer = {
-		// the id should be the same that for the parent
-		id: id_answer_parent,
-		id_answers: new Array(),
+			// the id should be the same that for the parent
+			id: id_answer_parent,
+			id_answers: new Array()
 	    };
 	}
 	if (!has(associated_answer.id_answers, answers.id)) {
