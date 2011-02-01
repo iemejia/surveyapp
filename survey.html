@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="styles/default.css" type="text/css" />
 <link rel="stylesheet" href="styles/jquery.ui.all.css" type="text/css"
 />
-<script type="text/javascript" src="scripts/jquery-1.4.4.js"></script>
+<script type="text/javascript" src="scripts/jquery-1.5.js"></script>
 <script type="text/javascript" src="scripts/jquery.hotkeys.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui-1.8.9.custom.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui-1.8.9-i18n.js"></script>
@@ -17,22 +17,7 @@
 <script type="text/javascript">
      $(document).ready(function() {
        paintQuestion();
-
-       $(document).bind('keyup', 'return', function(event) {
-          nextQuestion();
-          event.preventDefault();
-       });
-
-       $(document).bind('keyup', 'ctrl+right', function(event) {
-          nextQuestion();
-          event.preventDefault();
-       });
-       $(document).bind('keyup', 'ctrl+left', function(event) {
-          previousQuestion();
-          event.preventDefault();
-       });
-
-     }
+    }
 );
 
 </script>

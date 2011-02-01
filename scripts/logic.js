@@ -141,11 +141,12 @@ var paintQuestion = function() {
             nextQuestion();
             event.preventDefault();
 	});
-
+/*
 	$('#answer').bind('keyup', 'ctrl+right', function(event) {
             nextQuestion();
             event.preventDefault();
 	});
+*/
 	$('#answer').bind('keyup', 'ctrl+left', function(event) {
             previousQuestion();
             event.preventDefault();

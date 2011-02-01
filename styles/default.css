@@ -22,11 +22,32 @@ h1 {
 }
 
 a {
-    color: black; //#739CCE;
+    color: #000000;
     text-decoration: none;
     padding: 2px;
-//	border: 1px solid;
 }
+
+//selected
+.checkbox, .radio {
+  width: 19px;
+  height: 25px;
+  padding: 0 5px 0 0;
+//  background: url(checkbox.gif) no-repeat;
+  background: black;
+  display: block;
+  clear: left;
+  float: left;
+}
+
+/*
+.radio {
+	font-weight: bold;
+	color: white;
+	background-color: #303030;
+	background: rgba(25, 25, 25, 0.35);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(25, 25, 25, 0.25)), to(rgba(25, 25, 25, 0.45)));
+}
+*/
 
 a:hover {
 	text-decoration: underline;
@@ -64,17 +85,19 @@ li {
     background-repeat: no-repeat;
 }
 
-li a:hover {
-	background-color: #000000;
-	-webkit-border-radius: 0.6em;   
-}
 li a {
-//	margin-left: -30px;
-//	padding-left: 30px;
+
+}
+
+li a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 2px;
+
 }
 
 table, td, th {
-//    border:1px solid green;
+
 }
 
 th {
@@ -88,6 +111,16 @@ th {
 div#menu {
     padding-left: 30px; //1em;
     padding-bottom: 0.5em; //1em;
+}
+
+div#menu a, div#navigation a {
+    color: #739CCE;
+    text-decoration: none;
+    padding: 2px;
+}
+
+div#menu a:hover, div#navigation a:hover {
+    color: 6F918A;
 }
 
 div#question li {
@@ -108,7 +141,8 @@ div#navigation ul {
 //    background-color: #d5d5d5;
 //    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#ffffff));
     padding-left: 30px;
-    padding-bottom: 0.5em;
+    padding-top: 0em;
+    padding-bottom: 0em;
 }
 
 input[type="text"] { 

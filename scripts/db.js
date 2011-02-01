@@ -252,7 +252,7 @@ var getExportDataAsHtml = function(id_survey, type) {
 //			table += associated_answer.id_answers + ' ';
 			table += '<a href="view_answer.html?id_answer=' + associated_answer.id + '">' + associated_answer.id_answers + '</a> ';
 			table += '<a href="survey.html?id_answer=' + associated_answer.id + '">Edit</a> ';
-			table += '<a href="#">Remove</a>';
+//			table += '<a href="#">Remove</a>';
 			table += "<br/>";
 		    }
 		}
@@ -263,7 +263,7 @@ var getExportDataAsHtml = function(id_survey, type) {
 	    table += '<td><a href="view_answer.html?id_answer=' + answer.id +'">View</a></td>';
 	    table += '<td><a href="survey.html?id_answer=' + answer.id +'">Edit</a></td>';
 	    table += '<td><a href="survey.html?id_survey=1&id_answer_parent=' + answer.id + '">Associate</a></td>';
-	    table += '<td><a href="#">Remove</a></td>';
+//	    table += '<td><a href="#">Remove</a></td>';
 	}
 //	<a href="survey.html?id_survey=' + answer.id +'">Associate Survey</a></td>';
 //	table += '<td><a href="survey.html?id_answer=' + answer.id +'">Edit</a></td>';
