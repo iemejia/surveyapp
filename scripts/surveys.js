@@ -119,7 +119,7 @@ var surveys = {"surveys": [
      questions: [
 	 {id: "0", question: "Kode Rumah Tangga", type: "1" },
 	 {id: "1", question: "Senin, tanggal", type: "4" },
-	 {id: "2", question: "Senin, Diare", type: "2", options: ["tidak ","1 kali sehari","2 kali sehari","3 kali sehari","4 kali sehari"]},
+	 {id: "2", question: "Senin, Diare", type: "2", options: ["0","1","2","3","4"]},
 	 {id: "3", question: "Senin, Jenis Diare", type: "2", options: ["0","1","2","3","4","5","6","7"]},
 	 {id: "4", question: "Senin, ada darah / lendir", type: "2", options: ["Dengan darah dan","atau lendir"] },
 	 {id: "5", question: "Senin, Jenis Air", type: "2", options: ["Sumur","Pam","Isi Ulang","Air dalam Kemasan"] },
