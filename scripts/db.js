@@ -195,28 +195,11 @@ associated_answers_dao.associate = function(id_answer_parent, answers) {
 };
 
 
-var getAnswerAsHtml = function(id_answer) {
-    var table = "";
-    var answer = answers_dao.get(id_answer);
-    if(answer) {
-	table = "<table><tbody>";
-	table += "<tr><th>Id</th><th>Question</th><th>Answer</th></tr>";
-	var survey = surveys_dao.get(answer.id_survey);
-	for (var i=0; i < survey.questions.length; i++) {
-	    table += '<tr><td>' + i + '</td><td>' + survey.questions[i].question + '</td>';
-	    if (answer.answers[i]) {
-		table += '<td>' + answer.answers[i].answer + '</td></tr>';
-	    } else {
-		table += '<td></td></tr>';
-	    }
-	}	
-	table += "</tbody></table>";
-    }
-    return table;
-}
+
 
 //params should be id_survey, typeofquestion
 var getExportDataAsHtml = function(id_survey, type) {
+
     var survey = surveys_dao.get(id_survey);
     var filtered_questions = survey.questions.filter(function(val) {
 	// if no type parameter we show all the questions
@@ -238,8 +221,6 @@ var getExportDataAsHtml = function(id_survey, type) {
     
     // we build the header
     var table = "<table><tbody>";
-    // survey.description
-//    table += "<tr><th colspan=" + filtered_questions.length+1 + '">' + survey.id + "</th></tr>";
 
     // we print the ids of the questions
     table += "<tr>";
@@ -312,3 +293,116 @@ var getExportDataAsHtml = function(id_survey, type) {
     table += "</tbody></table>";
     return table;
 };
+
+var html_generator = {
+    id_survey: 0,
+    id_answer: 0,
+    getHeader: function() {
+    },
+    getTableBody: function() {
+    },
+    getRow: function() {
+    },
+    getTable: function() {
+	return "";
+    }
+};
+
+var consult_surveys_html_generator = Object.create(html_generator);
+consult_surveys_html_generator.getTable = function() {
+
+
+}
+
+var answers_html_generator = Object.create(html_generator);
+answers_html_generator.getTable = function() {
+    var table = "";
+    var answer = answers_dao.get(id_answer);
+    if(answer) {
+	table = "<table><tbody>";
+	table += "<tr><th>Id</th><th>Question</th><th>Answer</th></tr>";
+	var survey = surveys_dao.get(answer.id_survey);
+	for (var i=0; i < survey.questions.length; i++) {
+	    table += '<tr><td>' + i + '</td><td>' + survey.questions[i].question + '</td>';
+	    if (answer.answers[i]) {
+		table += '<td>' + answer.answers[i].answer + '</td></tr>';
+	    } else {
+		table += '<td></td></tr>';
+	    }
+	}	
+	table += "</tbody></table>";
+    }
+    return table;
+};
+
+var weekly_html_generator = Object.create(html_generator);
+weekly_html_generator.getTable = function() {
+    var table = "<table><tbody>";
+    // we build the header
+
+    table += "<tr>";
+    table += "<th>Id survey</th>";
+    table += "<th>Kode Rumah Tangga</th>";
+
+    table += "<th>tanggal</th>";
+    table += "<th>Diare</th>";
+    table += "<th>Jenis Diare</th>";
+    table += "<th>ada darah / lendir</th>";
+    table += "<th>Jenis Air</th>";
+    table += "<th>Air dimasak/direbu</th>";
+
+    table += "</tr>";
+
+    // now the body
+    // we get all the surveys of a given id_survey type
+    var answers_by_survey = answers_dao.getAll().filter(function(val) {
+	return (val.id_survey === id_survey);
+    });
+
+    // now we print the answers
+    for (var i = 0; i < answers_by_survey.length ; i++) {
+	var answer = answers_by_survey[i];
+	for (var j = 1; j < answer.answers.length ; j++) {
+	    if (j === 1 || (j-1) % 6 === 0) {
+		table += "<tr>";
+		table += "<td>" + answer.id + "</td>";
+		table += "<td>" + answer.answers[0].answer + "</td>";
+	    }
+	    table += "<td>" + answer.answers[j].answer + "</td>";
+	    if (j % 6 === 0) {
+		table += "</tr>";
+	    }
+	}
+    }
+
+    table += "</tbody></table>";
+    return table;
+
+}
+
+
+/** Synchronizes the answers against a REST backend */
+var syncSurveyAnswers = function() {
+    var backend_url = "http://chato.vividores.net/surveyapp/surveys/answers/";
+    var survey = surveys_dao.get(id_survey);
+
+    // TODO generar un UID unico para cada maquina, machine_configuration
+    // for each answer 1. add synchronized_date, synchronize status, id_machine
+    // PUT on server
+    // update local status
+
+/*
+  surveys_dao.KEY = "surveys:";
+  answers_dao.KEY = "answers:";
+  associated_answers_dao.KEY = "associated_answers:";
+
+$.ajax({
+    url: window.location.pathname,
+    type: 'PUT',
+    contentType: 'application/json',
+    data: JSON.stringify({ page: { my_data: 1 }),
+    dataType: 'json'
+});
+*/
+
+}

@@ -163,13 +163,26 @@ var paintExportedSurvey = function() {
     $("table").remove();
     var id_survey = (getParameterByName("id_survey")) ? parseInt(getParameterByName("id_survey")) : 0;
     var type = getParameterByName("type");
+    // defines the type of survey to be built, the factory for the table
+    var style = (getParameterByName("style")) ? getParameterByName("style") : "normal";
+
+    if (style === 'weekly') {
+	weekly_html_generator.id_survey = id_survey;
+	var export_data = weekly_html_generator.getTable();
+	$("#navigation").append(export_data);
+	return;
+    }
+
     var export_data = getExportDataAsHtml(id_survey, type); //valid arguments "public", "private"
+
     $("#navigation").append(export_data);
 };
 
 var paintAnswer = function() {
     $("table").remove();
     var id_answer = (getParameterByName("id_answer")) ? parseInt(getParameterByName("id_answer")) : 0;
-    var export_data = getAnswerAsHtml(id_answer); //valid arguments "public", "private"
+    // Here this is like the factory of functions
+    answers_html_generator.id_answer = id_answer;
+    var export_data = answers_html_generator.getTable();
     $("#navigation").append(export_data);
 };
