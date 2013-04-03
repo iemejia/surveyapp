@@ -154,6 +154,13 @@ var surveys = {"surveys": [
 	 {id: "40", question: "Minggu, ada darah / lendir", type: "2", options: ["Dengan darah dan","atau lendir"] },
 	 {id: "41", question: "Minggu, Jenis Air", type: "2", options: ["Sumur","Pam","Isi Ulang","Air dalam Kemasan"] },
 	 {id: "42", question: "Minggu, Air dimasak/direbus", type: "2", options: ["ya", "tidak"]}
+     ] },
+
+    {id: "3", description: "Finalization survey",
+     questions: [
+	 {id: "0", question: "TO COMPLEtE", type: "1" },
+	 {id: "1", question: "ALSO TO COMPLETE", type: "4" },
+	 {id: "1", question: "ANOTHER ONE", type: "4" }
      ] }
 ] };
 
